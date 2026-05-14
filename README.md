@@ -1,6 +1,6 @@
 # Philips Field Project Digital Twin Dashboard
 
-This frontend dashboard supports the **2026 Philips Field Project / digital twin** use case: it visualizes how **CTQs (critical-to-quality characteristics)** evolve across stations **S1–S5** for each **production unit**, so you can compare measurements to spec limits, spot trends, and highlight outliers.
+This frontend dashboard supports the **2026 Philips Drachten digital twin** use case: it visualizes how **CTQs (critical-to-quality characteristics)** evolve across stations **S1–S5** for each **production unit**, so you can compare measurements to spec limits, spot trends, and highlight outliers.
 
 ## What the dashboard does
 
