@@ -12,16 +12,16 @@ if ($LASTEXITCODE -ne 0) {
   if ($LASTEXITCODE -ne 0) { exit 1 }
 }
 
+$target = "https://github.com/Yunyi1125/2026-Philips-Digital-Twin.git"
 $hasOrigin = git remote get-url origin 2>$null
 if ($LASTEXITCODE -eq 0) {
   git push -u origin main
   exit $LASTEXITCODE
 }
 
-$repoName = "dashboard"
-Write-Host "Creating public repo '$repoName' and pushing..."
-gh repo create $repoName --public --source=. --remote=origin --push
+git remote add origin $target
+git push -u origin main
 if ($LASTEXITCODE -ne 0) {
-  Write-Host "If the name is taken, edit repoName in push-to-github.ps1 and run again."
+  Write-Host "Push failed. Ensure you are logged in (gh auth login) and have push access to Yunyi1125/2026-Philips-Digital-Twin."
   exit $LASTEXITCODE
 }

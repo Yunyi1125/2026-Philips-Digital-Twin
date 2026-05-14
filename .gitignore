@@ -3,6 +3,5 @@ dist
 .DS_Store
 *.log
 
-# Local-only dataset (not published)
-dataset_Philips_FieldProject_2026.csv
-public/dataset_Philips_FieldProject_2026.csv
+# Raw datasets stay local only (do not commit)
+*.csv
