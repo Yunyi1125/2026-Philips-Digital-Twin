@@ -1,41 +1,42 @@
-# Philips Field Project 数字孪生看板
+# Philips Field Project Digital Twin Dashboard
 
-本仓库中的前端看板用于 **2026 Philips Field Project / 数字孪生** 场景：把产线各工位（S1–S5）的 **CTQ（关键质量特性）** 随「每台产品（unit）」演化的过程可视化，便于对照规格、观察趋势与异常。
+This frontend dashboard supports the **2026 Philips Field Project / digital twin** use case: it visualizes how **CTQs (critical-to-quality characteristics)** evolve across stations **S1–S5** for each **production unit**, so you can compare measurements to spec limits, spot trends, and highlight outliers.
 
-## 这个 Dashboard 做什么
+## What the dashboard does
 
-- **按样本回放**：沿 `Sample` 序号逐台推进（可播放/暂停、调节速度），模拟产线时间推进。
-- **规格与超差**：CTQ 的目标值、LSL/USL 来自文档 *FieldProject_DigitalTwin_2026* 中的 **Table 1**；对当前样本自动标出 **未落在规格内的 CTQ**。
-- **主视图**：中间区域用动画展示当前样本的关键信息；下方用 **Plotly** 绘制各 CTQ 在 **滑动时间窗**（最近若干台已完工 unit）内的分布与轨迹，便于看短期波动与是否贴边、超差。
-- **侧栏**：当前样本号、失败 CTQ 列表、图表窗口长度等控制项。
+- **Unit-by-unit playback**: Step through `Sample` order with play/pause and adjustable speed to mimic line time progression.
+- **Specs and failures**: Targets, LSL, and USL come from **Table 1** in *FieldProject_DigitalTwin_2026*; the current unit is checked and **out-of-spec CTQs** are listed.
+- **Main view**: A line-style animation summarizes the active unit; **Plotly** charts below show each CTQ over a **trailing window** of recently completed units so you can see short-term variation and boundary crossings.
+- **Sidebar**: Current sample index, failing CTQ list, chart window length, and other controls.
 
-数据列对应 `src/ctqSpecs.ts` 中定义的工位与指标（如 S1_Q1、S2_Q1…，单位含 μm、Hz 等）。
+Column semantics match the station/metric keys defined in `src/ctqSpecs.ts` (e.g. S1_Q1, S2_Q1, … with units such as μm and Hz).
 
-## 数据说明（仓库不含原始数据）
+## Data (raw files are not in the repo)
 
-应用从 **`/dataset_Philips_FieldProject_2026.csv`** 加载数据（开发时对应 **`public/dataset_Philips_FieldProject_2026.csv`**）。  
-出于合规与体积考虑，**原始 CSV 不会提交到 Git**（见 `.gitignore`）。
+The app loads **`/dataset_Philips_FieldProject_2026.csv`**, which in local development maps to **`public/dataset_Philips_FieldProject_2026.csv`**.
 
-本地运行前请自行将符合列名的 CSV 放入 `public/` 目录，文件名与上述一致；CSV 需包含表头，且至少包含 `Sample` 与各 CTQ 列（与 `ctqSpecs.ts` 中键名一致）。
+For compliance and size, **raw CSV datasets are not committed** (see `.gitignore`).
 
-## 本地运行
+Before running locally, place a CSV with the expected headers in `public/` using that filename. The file must include a `Sample` column plus each CTQ column whose name matches the keys in `ctqSpecs.ts`.
+
+## Local development
 
 ```bash
 npm install
 npm run dev
 ```
 
-生产构建：
+Production build:
 
 ```bash
 npm run build
 npm run preview
 ```
 
-## 技术栈
+## Stack
 
-React 18、TypeScript、Vite、Papa Parse（CSV）、Plotly.js（图表）。
+React 18, TypeScript, Vite, Papa Parse (CSV), Plotly.js (charts).
 
-## 与主项目的关系
+## Relation to the main repository
 
-本看板作为 **[Yunyi1125/2026-Philips-Digital-Twin](https://github.com/Yunyi1125/2026-Philips-Digital-Twin)** 仓库中的前端部分，用于数字孪生/现场项目数据的可视化探索；**业务结论仍以正式数据与文档为准。**
+This dashboard lives in **[Yunyi1125/2026-Philips-Digital-Twin](https://github.com/Yunyi1125/2026-Philips-Digital-Twin)** as the web UI for exploring digital-twin / field-project data. **Official conclusions should still be based on governed data sources and project documentation.**
